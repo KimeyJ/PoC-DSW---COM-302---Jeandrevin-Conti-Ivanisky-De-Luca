@@ -6,6 +6,7 @@ import {
   Rel,
   OneToMany,
   Cascade,
+  DateTimeType,
 } from '@mikro-orm/core';
 import { BaseEntity } from '../shared/baseEntity.entity.js';
 import { Artist } from '../artist/artist.entity.js';
@@ -17,13 +18,13 @@ export class Record extends BaseEntity {
   name!: string;
 
   @Property({ nullable: true })
-  release_date!: string;
+  release_date!: Date;
 
   @Property({ nullable: false })
   genre!: string;
 
-  //@ManyToMany(() => Artist, (artist) => artist.records)
-  //artists = new Collection<Artist>(this);
+  @ManyToMany(() => Artist, (artist) => artist.records)
+  artists = new Collection<Artist>(this);
 
   @OneToMany(() => Song, (song) => song.record, {
     cascade: [Cascade.ALL],

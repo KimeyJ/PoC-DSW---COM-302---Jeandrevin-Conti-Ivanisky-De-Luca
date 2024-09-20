@@ -7,14 +7,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Collection, Entity, ManyToMany, Property } from '@mikro-orm/core';
+import { Cascade, Entity, ManyToMany, Property, } from '@mikro-orm/core';
 import { BaseEntity } from '../shared/baseEntity.entity.js';
 import { Record } from '../record/record.entity.js';
 export let Artist = class Artist extends BaseEntity {
-    constructor() {
-        super(...arguments);
-        this.records = new Collection(this);
-    }
 };
 __decorate([
     Property({ nullable: true }),
@@ -25,8 +21,11 @@ __decorate([
     __metadata("design:type", Number)
 ], Artist.prototype, "age", void 0);
 __decorate([
-    ManyToMany(() => Record),
-    __metadata("design:type", Object)
+    ManyToMany(() => Record, (record) => record.artists, {
+        cascade: [Cascade.ALL],
+        owner: true,
+    }),
+    __metadata("design:type", Array)
 ], Artist.prototype, "records", void 0);
 Artist = __decorate([
     Entity()

@@ -17,10 +17,10 @@ function sanitizedSongInput(req, res, next) {
 }
 async function findAll(req, res) {
     try {
-        const songs = await em.find(Song, {});
-        res
-            .status(200)
-            .json({ message: 'Found all songs', data: songs });
+        const songs = await em.find(Song, {}, {
+            populate: ['record'],
+        });
+        res.status(200).json({ message: 'Found all songs', data: songs });
     }
     catch (error) {
         res.status(500).json({ message: error.message });
@@ -29,7 +29,9 @@ async function findAll(req, res) {
 async function findOne(req, res) {
     try {
         const id = Number.parseInt(req.params.id);
-        const song = await em.find(Song, { id });
+        const song = await em.find(Song, { id }, {
+            populate: ['record'],
+        });
         res.status(200).json({ message: 'Found song', data: song });
     }
     catch (error) {
@@ -52,9 +54,7 @@ async function update(req, res) {
         const SongToUpdate = await em.findOneOrFail(Song, { id });
         em.assign(SongToUpdate, req.body.sanitizedInput);
         await em.flush();
-        res
-            .status(200)
-            .json({ message: 'Song updated', data: SongToUpdate });
+        res.status(200).json({ message: 'Song updated', data: SongToUpdate });
     }
     catch (error) {
         res.status(500).json({ message: error.message });

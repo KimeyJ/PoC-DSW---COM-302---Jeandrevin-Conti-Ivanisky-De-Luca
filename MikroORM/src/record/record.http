@@ -1,0 +1,43 @@
+### Get all the records
+GET http://localhost:3000/api/records
+
+
+### POST
+# @name createRecord
+POST http://localhost:3000/api/records
+Content-Type: application/json
+
+{
+    "name": "oktubre",
+    "release_date": "10-04-1986",
+    "genre": "ROCK"
+}
+
+### ID
+@id = {{createRecord.response.body.data.id}}
+
+### Get one record
+GET http://localhost:3000/api/records/{{id}}
+
+### Update an record
+PUT http://localhost:3000/api/records/{{id}}
+Content-Type: application/json
+
+{
+    "artists": [1] 
+}
+
+### Delete a record
+DELETE http://localhost:3000/api/records/{{id}}
+
+
+### POST
+# @name createRecord2
+POST http://localhost:3000/api/records
+Content-Type: application/json
+
+{
+    "name": "Born to Die",
+    "release_date" : "27-01-2012",
+    "genre": "Alt Pop"
+}

@@ -1,4 +1,4 @@
-### Get all the specialties
+### Get all the artists
 GET http://localhost:3000/api/artists
 
 
@@ -9,24 +9,25 @@ Content-Type: application/json
 
 {
     "name": "Indio Solari",
-    "age" : 70
+    "age" : 70,
+    "records":[1]
 }
 
 ### ID
 @id = {{createArtist.response.body.data.id}}
 
-### Get one specialty
+### Get one artist
 GET http://localhost:3000/api/artists/{{id}}
 
-### Update a specialty
+### Update an artist
 PUT http://localhost:3000/api/artists/{{id}}
 Content-Type: application/json
 
 {
-    "age": 40 
+    "records": [1]
 }
 
-### Delete a specialty
+### Delete an artist
 DELETE http://localhost:3000/api/artists/{{id}}
 
 
@@ -36,6 +37,7 @@ POST http://localhost:3000/api/artists
 Content-Type: application/json
 
 {
-    "name": "Skay",
-    "age" : 73
+    "name": "Lana del Rey",
+    "age" : 39,
+    "records": [2]
 }

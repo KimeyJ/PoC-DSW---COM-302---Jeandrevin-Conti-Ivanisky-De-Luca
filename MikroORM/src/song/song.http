@@ -1,0 +1,65 @@
+### Get all the songs
+GET http://localhost:3000/api/songs
+
+
+### POST
+# @name createSong
+POST http://localhost:3000/api/songs
+Content-Type: application/json
+
+{
+    "name": "Motor Psico",
+    "duration": 4.56,
+    "record": 1
+}
+
+### ID
+@id = {{createSong.response.body.data.id}}
+
+### Get one songs
+GET http://localhost:3000/api/songs/{{id}}
+
+### Update an songs
+PUT http://localhost:3000/api/songs/{{id}}
+Content-Type: application/json
+
+{
+    "duration": 5 
+}
+
+### Delete a song
+DELETE http://localhost:3000/api/records/{{id}}
+
+
+### POST
+# @name createSong2
+POST http://localhost:3000/api/songs
+Content-Type: application/json
+
+{
+    "name": "Preso en Mi Ciudad",
+    "duration" : 4.03,
+    "record": 1
+}
+
+### POST
+# @name createSong3
+POST http://localhost:3000/api/songs
+Content-Type: application/json
+
+{
+    "name": "Video Games",
+    "duration" : 4.42,
+    "record": 2
+}
+
+### POST
+# @name createSong4
+POST http://localhost:3000/api/songs
+Content-Type: application/json
+
+{
+    "name": "Summertime Sadness",
+    "duration" : 4.25,
+    "record": 2
+}

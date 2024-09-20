@@ -6,6 +6,7 @@ function sanitizeArtistInput(req, res, next) {
         id: req.body.id,
         name: req.body.name,
         age: req.body.age,
+        records: req.body.records,
     };
     Object.keys(req.body.sanitizedInput).forEach((key) => {
         if (req.body.sanitizedInput[key] === undefined) {
@@ -16,7 +17,9 @@ function sanitizeArtistInput(req, res, next) {
 }
 async function findAll(req, res) {
     try {
-        const artists = await em.find(Artist, {});
+        const artists = await em.find(Artist, {}, {
+            populate: ['records'],
+        });
         res.status(200).json({ message: 'Found all artist', data: artists });
     }
     catch (error) {

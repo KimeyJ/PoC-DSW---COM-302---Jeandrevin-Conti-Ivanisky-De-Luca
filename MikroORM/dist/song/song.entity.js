@@ -7,9 +7,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Entity, ManyToOne, Property } from "@mikro-orm/core";
-import { BaseEntity } from "../shared/baseEntity.entity.js";
-import { Record } from "../record/record.entity.js";
+import { Entity, ManyToOne, Property } from '@mikro-orm/core';
+import { BaseEntity } from '../shared/baseEntity.entity.js';
+import { Record } from '../record/record.entity.js';
 export let Song = class Song extends BaseEntity {
 };
 __decorate([
@@ -17,7 +17,7 @@ __decorate([
     __metadata("design:type", String)
 ], Song.prototype, "name", void 0);
 __decorate([
-    Property({ nullable: false }),
+    Property({ nullable: false, type: 'decimal', precision: 10, scale: 4 }),
     __metadata("design:type", Number)
 ], Song.prototype, "duration", void 0);
 __decorate([
