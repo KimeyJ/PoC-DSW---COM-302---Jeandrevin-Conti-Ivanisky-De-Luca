@@ -1,0 +1,209 @@
+{
+    "type": "MySQLNotebook",
+    "version": "1.0",
+    "caption": "DB Notebook",
+    "content": "\ncreate database if not exists poc_MySQL;\n\nuse poc_MySQL;\n\n-- create user if not exists kimey@'%' identified by 'kimey';\n-- grant select, update, insert, delete on poc_MySQL.* to kimey@'%';\n\n-- drop table IF EXISTS `poc_MySQL`.`artists`;\ncreate table if not exists `poc_MySQL`.`artists` (\n  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,\n  `name` VARCHAR(255) NULL,\n  `age` INT UNSIGNED NULL,\n  PRIMARY KEY (`id`)\n);\n\n-- drop table IF EXISTS `poc_MySQL`.`records`;\ncreate table if not exists `poc_MySQL`.`records` (\n  `id` INT UNSIGNED NOT NULL,\n  `name` VARCHAR(255) NOT NULL,\n  PRIMARY KEY (`id`));\n\n-- drop table IF EXISTS `poc_MySQL`.`artists-records`;\ncreate table if not exists `poc_MySQL`.`artists-records` (\n    `idArtist` INT UNSIGNED NOT NULL,\n    `idRecord` INT UNSIGNED NOT NULL,\n    PRIMARY KEY (`idArtist`,`idRecord`),\n    CONSTRAINT `fk_artists-records_artist` FOREIGN KEY (`idArtist`) REFERENCES `artists` (`id`) ON UPDATE CASCADE,\n    CONSTRAINT `fk_artists-records_records` FOREIGN KEY (`idRecord`) REFERENCES `records` (`id`) ON UPDATE CASCADE\n);\n\n-- DROP table IF EXISTS `poc_MySQL`.`songs`;\ncreate table IF not EXISTS `poc_MySQL`.`songs` (\n    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,\n    `name` VARCHAR(255) NOT NULL UNIQUE,\n    `duration` REAL(10,4) NOT NULL,\n    `record` INT UNSIGNED NOT NULL,\n    PRIMARY KEY (`id`),\n    CONSTRAINT `fk_songs_record` FOREIGN KEY (`record`) REFERENCES `records` (`id`) ON UPDATE CASCADE\n);\n\n\n\n\n\n",
+    "options": {
+        "tabSize": 4,
+        "indentSize": 4,
+        "insertSpaces": true,
+        "defaultEOL": "LF",
+        "trimAutoWhitespace": true
+    },
+    "viewState": {
+        "cursorState": [
+            {
+                "inSelectionMode": false,
+                "selectionStart": {
+                    "lineNumber": 46,
+                    "column": 1
+                },
+                "position": {
+                    "lineNumber": 46,
+                    "column": 1
+                }
+            }
+        ],
+        "viewState": {
+            "scrollLeft": 0,
+            "firstPosition": {
+                "lineNumber": 3,
+                "column": 1
+            },
+            "firstPositionDeltaTop": -15
+        },
+        "contributionsState": {
+            "editor.contrib.folding": {},
+            "editor.contrib.wordHighlighter": false
+        }
+    },
+    "contexts": [
+        {
+            "state": {
+                "start": 1,
+                "end": 1,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 2,
+                            "content": "Welcome to the MySQL Shell - DB Notebook.\n\nPress Ctrl+Enter to execute the code block.\n\nExecute \\sql to switch to SQL, \\js to JavaScript and \\ts to TypeScript mode.\nExecute \\help or \\? for help;",
+                            "language": "ansi"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 0
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 2,
+                "end": 45,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "0053bce6-36af-4086-903d-d7357287a7be",
+                            "content": "OK, 1 row affected in 22.899ms"
+                        },
+                        {
+                            "type": 4,
+                            "index": 1,
+                            "resultId": "0a85b123-43c0-469a-9f3b-c17529728e06",
+                            "content": "OK, 0 records retrieved in 3.058ms"
+                        },
+                        {
+                            "type": 4,
+                            "index": 2,
+                            "resultId": "45ade1f3-9707-45d9-bc0c-00dbe8f6395b",
+                            "content": "OK, 0 records retrieved in 19.156ms"
+                        },
+                        {
+                            "type": 4,
+                            "index": 3,
+                            "resultId": "562441d3-f1b3-49db-c98f-2c8dfdff241b",
+                            "content": "OK, 0 records retrieved in 16.309ms"
+                        },
+                        {
+                            "type": 4,
+                            "index": 4,
+                            "resultId": "5600d081-e219-4458-b802-ff9ca46f8be0",
+                            "content": "OK, 0 records retrieved in 23.318ms"
+                        },
+                        {
+                            "type": 4,
+                            "index": 5,
+                            "resultId": "38aeb0ef-cc0d-4a22-af72-112651b5c678",
+                            "content": "OK, 0 records retrieved in 22.979ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 40
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 40,
+                            "length": 16
+                        },
+                        "contentStart": 42,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 56,
+                            "length": 355
+                        },
+                        "contentStart": 237,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 411,
+                            "length": 184
+                        },
+                        "contentStart": 460,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 595,
+                            "length": 465
+                        },
+                        "contentStart": 652,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 1060,
+                            "length": 384
+                        },
+                        "contentStart": 1107,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 1444,
+                            "length": 5
+                        },
+                        "contentStart": 1443,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 46,
+                "end": 46,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 0
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        }
+    ]
+}
