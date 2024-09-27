@@ -5,6 +5,8 @@ export class RecordRepository {
         for (const record of records) {
             const [artists] = await pool.query('select a.* from artists a inner join `artists-records` ar on ar.idArtist = a.id and ar.idrecord = ?', [record.id]);
             record.artists = artists;
+            const [songs] = await pool.query('select s.* from songs s inner join records r on r.id = s.record where r.id = ?', [record.id]);
+            record.songs = songs;
         }
         return records;
     }
@@ -17,12 +19,14 @@ export class RecordRepository {
         const record = records[0];
         const [artists] = await pool.query('select a.* from artists a inner join `artists-records` ar on ar.idArtist = a.id where idRecord = ?', [record.id]);
         record.artists = artists;
+        const [songs] = await pool.query('select s.* from songs s inner join records r on r.id = s.record where r.id = ?', [record.id]);
+        record.songs = songs;
         return record;
     }
     async add(recordInputWithArtists) {
         const { record, artistIds } = recordInputWithArtists;
-        const { id, artists, ...recordRow } = record;
-        const [result] = await pool.query('insert into records set ?', [record]);
+        const { id, artists, songs, ...recordRow } = record;
+        const [result] = await pool.query('insert into records set ?', [recordRow]);
         record.id = result.insertId;
         const values = artistIds.map((artistId) => [artistId, record.id]);
         await pool.query('insert into `artists-records` (idArtist,idRecord) values ?', [values]);

@@ -5,7 +5,7 @@ function sanitizeSongInput(req, res, next) {
     req.body.sanitizedInput = {
         name: req.body.name,
         duration: req.body.duration,
-        record: req.body.record
+        record: req.body.record,
     };
     Object.keys(req.body.sanitizedInput).forEach((key) => {
         if (req.body.sanitizedInput[key] === undefined) {
@@ -38,7 +38,7 @@ async function update(req, res) {
         return res.status(404).send({ message: 'Song not found' });
     }
     else {
-        res.status(200).send({ message: 'SOng updated', data: song });
+        res.status(200).send({ message: 'Song updated', data: song });
     }
 }
 async function remove(req, res) {

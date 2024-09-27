@@ -8,7 +8,7 @@ function sanitizeSongInput(req: Request, res: Response, next: NextFunction) {
   req.body.sanitizedInput = {
     name: req.body.name,
     duration: req.body.duration,
-    record: req.body.record
+    record: req.body.record,
   };
 
   Object.keys(req.body.sanitizedInput).forEach((key) => {
@@ -42,15 +42,12 @@ async function add(req: Request, res: Response) {
 }
 
 async function update(req: Request, res: Response) {
-  const song = await repository.update(
-    req.params.id,
-    req.body.sanitizedInput
-  );
+  const song = await repository.update(req.params.id, req.body.sanitizedInput);
 
   if (song === undefined) {
     return res.status(404).send({ message: 'Song not found' });
   } else {
-    res.status(200).send({ message: 'SOng updated', data: song });
+    res.status(200).send({ message: 'Song updated', data: song });
   }
 }
 

@@ -2,7 +2,7 @@
     "type": "MySQLNotebook",
     "version": "1.0",
     "caption": "DB Notebook",
-    "content": "\ncreate database if not exists poc_MySQL;\n\nuse poc_MySQL;\n\n-- create user if not exists kimey@'%' identified by 'kimey';\n-- grant select, update, insert, delete on poc_MySQL.* to kimey@'%';\n\n-- drop table IF EXISTS `poc_MySQL`.`artists`;\ncreate table if not exists `poc_MySQL`.`artists` (\n  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,\n  `name` VARCHAR(255) NULL,\n  `age` INT UNSIGNED NULL,\n  PRIMARY KEY (`id`)\n);\n\n-- drop table IF EXISTS `poc_MySQL`.`records`;\ncreate table if not exists `poc_MySQL`.`records` (\n  `id` INT UNSIGNED NOT NULL,\n  `name` VARCHAR(255) NOT NULL,\n  PRIMARY KEY (`id`));\n\n-- drop table IF EXISTS `poc_MySQL`.`artists-records`;\ncreate table if not exists `poc_MySQL`.`artists-records` (\n    `idArtist` INT UNSIGNED NOT NULL,\n    `idRecord` INT UNSIGNED NOT NULL,\n    PRIMARY KEY (`idArtist`,`idRecord`),\n    CONSTRAINT `fk_artists-records_artist` FOREIGN KEY (`idArtist`) REFERENCES `artists` (`id`) ON UPDATE CASCADE,\n    CONSTRAINT `fk_artists-records_records` FOREIGN KEY (`idRecord`) REFERENCES `records` (`id`) ON UPDATE CASCADE\n);\n\n-- DROP table IF EXISTS `poc_MySQL`.`songs`;\ncreate table IF not EXISTS `poc_MySQL`.`songs` (\n    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,\n    `name` VARCHAR(255) NOT NULL UNIQUE,\n    `duration` REAL(10,4) NOT NULL,\n    `record` INT UNSIGNED NOT NULL,\n    PRIMARY KEY (`id`),\n    CONSTRAINT `fk_songs_record` FOREIGN KEY (`record`) REFERENCES `records` (`id`) ON UPDATE CASCADE\n);\n\n\n\n\n\n",
+    "content": "\ndrop database if exists poc_MySQL;\ncreate database if not exists poc_MySQL;\n\nuse poc_MySQL;\n\n-- create user if not exists kimey@'%' identified by 'kimey';\n-- grant select, update, insert, delete on poc_MySQL.* to kimey@'%';\n\ndrop table IF EXISTS `poc_MySQL`.`artists`;\ncreate table if not exists `poc_MySQL`.`artists` (\n  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,\n  `name` VARCHAR(255) NULL,\n  `age` INT UNSIGNED NULL,\n  PRIMARY KEY (`id`)\n);\n\ndrop table IF EXISTS `poc_MySQL`.`records`;\ncreate table if not exists `poc_MySQL`.`records` (\n  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,\n  `name` VARCHAR(255) NOT NULL,\n  PRIMARY KEY (`id`));\n\ndrop table IF EXISTS `poc_MySQL`.`artists-records`;\ncreate table if not exists `poc_MySQL`.`artists-records` (\n    `idArtist` INT UNSIGNED NOT NULL,\n    `idRecord` INT UNSIGNED NOT NULL,\n    PRIMARY KEY (`idArtist`,`idRecord`),\n    CONSTRAINT `fk_artists-records_artist` FOREIGN KEY (`idArtist`) REFERENCES `artists` (`id`) ON UPDATE CASCADE,\n    CONSTRAINT `fk_artists-records_records` FOREIGN KEY (`idRecord`) REFERENCES `records` (`id`) ON UPDATE CASCADE\n);\n\nDROP table IF EXISTS `poc_MySQL`.`songs`;\ncreate table IF not EXISTS `poc_MySQL`.`songs` (\n    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,\n    `name` VARCHAR(255) NOT NULL UNIQUE,\n    `duration` REAL(10,4) NOT NULL,\n    `record` INT UNSIGNED NOT NULL,\n    PRIMARY KEY (`id`),\n    CONSTRAINT `fk_songs_record` FOREIGN KEY (`record`) REFERENCES `records` (`id`) ON UPDATE CASCADE\n);\n\n\n\n\n\n",
     "options": {
         "tabSize": 4,
         "indentSize": 4,
@@ -27,10 +27,10 @@
         "viewState": {
             "scrollLeft": 0,
             "firstPosition": {
-                "lineNumber": 3,
+                "lineNumber": 44,
                 "column": 1
             },
-            "firstPositionDeltaTop": -15
+            "firstPositionDeltaTop": -7
         },
         "contributionsState": {
             "editor.contrib.folding": {},
@@ -72,7 +72,7 @@
         {
             "state": {
                 "start": 2,
-                "end": 45,
+                "end": 46,
                 "language": "mysql",
                 "result": {
                     "type": "text",
@@ -80,105 +80,180 @@
                         {
                             "type": 4,
                             "index": 0,
-                            "resultId": "0053bce6-36af-4086-903d-d7357287a7be",
-                            "content": "OK, 1 row affected in 22.899ms"
+                            "resultId": "a31be62a-6b32-4629-e826-35ecfc9d8907",
+                            "content": "OK, 4 rows affected in 341.158ms"
                         },
                         {
                             "type": 4,
                             "index": 1,
-                            "resultId": "0a85b123-43c0-469a-9f3b-c17529728e06",
-                            "content": "OK, 0 records retrieved in 3.058ms"
+                            "resultId": "7d4b6ceb-98f4-4b70-dd76-0b717a3a9b05",
+                            "content": "OK, 1 row affected in 57.648ms"
                         },
                         {
                             "type": 4,
                             "index": 2,
-                            "resultId": "45ade1f3-9707-45d9-bc0c-00dbe8f6395b",
-                            "content": "OK, 0 records retrieved in 19.156ms"
+                            "resultId": "5619cede-2c90-4545-a1c0-3554c499df9d",
+                            "content": "OK, 0 records retrieved in 5.858ms"
                         },
                         {
                             "type": 4,
                             "index": 3,
-                            "resultId": "562441d3-f1b3-49db-c98f-2c8dfdff241b",
-                            "content": "OK, 0 records retrieved in 16.309ms"
+                            "resultId": "5699763f-e701-4337-8ea0-848d9bbc27a2",
+                            "content": "OK, 0 records retrieved in 23.515ms"
                         },
                         {
                             "type": 4,
                             "index": 4,
-                            "resultId": "5600d081-e219-4458-b802-ff9ca46f8be0",
-                            "content": "OK, 0 records retrieved in 23.318ms"
+                            "resultId": "52736c6f-f54e-4153-e31a-f1b9a95c4fd2",
+                            "content": "OK, 0 records retrieved in 180.954ms"
                         },
                         {
                             "type": 4,
                             "index": 5,
-                            "resultId": "38aeb0ef-cc0d-4a22-af72-112651b5c678",
-                            "content": "OK, 0 records retrieved in 22.979ms"
+                            "resultId": "b4ac937b-1108-48b0-9d4e-4474d9cf3571",
+                            "content": "OK, 0 records retrieved in 44.797ms"
+                        },
+                        {
+                            "type": 4,
+                            "index": 6,
+                            "resultId": "6faae296-fa26-4a78-abc5-dee064b37910",
+                            "content": "OK, 0 records retrieved in 286.927ms"
+                        },
+                        {
+                            "type": 4,
+                            "index": 7,
+                            "resultId": "3176bbc9-ebf3-45f8-cbc4-aaa46bf3a2b7",
+                            "content": "OK, 0 records retrieved in 16.456ms"
+                        },
+                        {
+                            "type": 4,
+                            "index": 8,
+                            "resultId": "92338248-1704-40ac-b65d-b61268f8d308",
+                            "content": "OK, 0 records retrieved in 176.517ms"
+                        },
+                        {
+                            "type": 4,
+                            "index": 9,
+                            "resultId": "2b9c0cb4-7be1-46f2-cd38-2f4c5f42ef25",
+                            "content": "OK, 0 records retrieved in 23.445ms"
+                        },
+                        {
+                            "type": 4,
+                            "index": 10,
+                            "resultId": "5700f555-1c33-4121-9283-101a9c70f155",
+                            "content": "OK, 0 records retrieved in 194.124ms"
                         }
                     ]
                 },
-                "currentHeight": 28,
+                "currentHeight": 213.328125,
                 "currentSet": 1,
                 "statements": [
                     {
                         "delimiter": ";",
                         "span": {
                             "start": 0,
-                            "length": 40
+                            "length": 34
                         },
-                        "contentStart": 0,
+                        "contentStart": 1,
                         "state": 0
                     },
                     {
                         "delimiter": ";",
                         "span": {
-                            "start": 40,
+                            "start": 34,
+                            "length": 41
+                        },
+                        "contentStart": 35,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 75,
                             "length": 16
                         },
-                        "contentStart": 42,
+                        "contentStart": 77,
                         "state": 0
                     },
                     {
                         "delimiter": ";",
                         "span": {
-                            "start": 56,
-                            "length": 355
+                            "start": 91,
+                            "length": 177
                         },
-                        "contentStart": 237,
+                        "contentStart": 226,
                         "state": 0
                     },
                     {
                         "delimiter": ";",
                         "span": {
-                            "start": 411,
-                            "length": 184
+                            "start": 268,
+                            "length": 175
                         },
-                        "contentStart": 460,
+                        "contentStart": 269,
                         "state": 0
                     },
                     {
                         "delimiter": ";",
                         "span": {
-                            "start": 595,
-                            "length": 465
+                            "start": 443,
+                            "length": 45
                         },
-                        "contentStart": 652,
+                        "contentStart": 446,
                         "state": 0
                     },
                     {
                         "delimiter": ";",
                         "span": {
-                            "start": 1060,
-                            "length": 384
+                            "start": 488,
+                            "length": 151
                         },
-                        "contentStart": 1107,
+                        "contentStart": 489,
                         "state": 0
                     },
                     {
                         "delimiter": ";",
                         "span": {
-                            "start": 1444,
+                            "start": 639,
+                            "length": 53
+                        },
+                        "contentStart": 642,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 692,
+                            "length": 409
+                        },
+                        "contentStart": 693,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 1101,
+                            "length": 43
+                        },
+                        "contentStart": 1104,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 1144,
+                            "length": 338
+                        },
+                        "contentStart": 1145,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 1482,
                             "length": 5
                         },
-                        "contentStart": 1443,
+                        "contentStart": 1481,
                         "state": 3
                     }
                 ]
@@ -187,8 +262,8 @@
         },
         {
             "state": {
-                "start": 46,
-                "end": 46,
+                "start": 47,
+                "end": 47,
                 "language": "mysql",
                 "currentSet": 1,
                 "statements": [

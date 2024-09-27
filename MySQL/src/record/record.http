@@ -8,7 +8,7 @@ POST http://localhost:3000/api/records
 Content-Type: application/json
 
 {
-    "name": "oktube",
+    "name": "Bang Bang estas liquidado",
     "artistIds": [1]
 }
 

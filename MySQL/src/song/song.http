@@ -1,0 +1,30 @@
+### Get all songs
+GET http://localhost:3000/api/songs
+
+### Create a Song
+# @name createSong
+POST http://localhost:3000/api/songs
+Content-Type: application/json
+
+{
+    "name": "Preso en mi ciudad",
+    "duration": 3.2,
+    "record": 1
+}
+
+### ID
+@id = {{createSong.response.body.data.id}}
+
+### Get one song
+GET http://localhost:3000/api/songs/{{id}}
+
+### Update one song
+PUT http://localhost:3000/api/songs/{{id}}
+Content-Type: application/json
+
+{
+    "duration": 3.5
+}
+
+### Delete one song
+DELETE http://localhost:3000/api/songs/{{id}}

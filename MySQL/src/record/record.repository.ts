@@ -17,6 +17,11 @@ export class RecordRepository implements Repository<Record> {
         [record.id]
       );
       record.artists = artists as any;
+      const [songs] = await pool.query(
+        'select s.* from songs s inner join records r on r.id = s.record where r.id = ?',
+        [record.id]
+      );
+      record.songs = songs as any;
     }
 
     return records as Record[];
@@ -37,6 +42,11 @@ export class RecordRepository implements Repository<Record> {
       [record.id]
     );
     record.artists = artists as any;
+    const [songs] = await pool.query(
+      'select s.* from songs s inner join records r on r.id = s.record where r.id = ?',
+      [record.id]
+    );
+    record.songs = songs as any;
     return record;
   }
 
@@ -44,10 +54,10 @@ export class RecordRepository implements Repository<Record> {
     recordInputWithArtists: RecordInputWithArtists
   ): Promise<Record | undefined> {
     const { record, artistIds } = recordInputWithArtists;
-    const { id, artists, ...recordRow } = record;
+    const { id, artists, songs, ...recordRow } = record;
     const [result] = await pool.query<ResultSetHeader>(
       'insert into records set ?',
-      [record]
+      [recordRow]
     );
     record.id = result.insertId;
     const values = artistIds.map((artistId) => [artistId, record.id]);

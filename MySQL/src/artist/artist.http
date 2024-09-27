@@ -8,7 +8,7 @@ POST http://localhost:3000/api/artists
 Content-Type: application/json
 
 {
-    "name": "indio solario",
+    "name": "indio solari",
     "age": 77
 }
 
