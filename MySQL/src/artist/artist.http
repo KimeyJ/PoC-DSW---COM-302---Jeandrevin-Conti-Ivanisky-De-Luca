@@ -1,0 +1,31 @@
+### Get all artists
+GET http://localhost:3000/api/artists
+
+
+### Create an artist
+# @name createArtist
+POST http://localhost:3000/api/artists
+Content-Type: application/json
+
+{
+    "name": "indio solario",
+    "age": 77
+}
+
+### ID
+@id = {{createArtist.response.body.data.id}}
+
+### Get one artist
+GET http://localhost:3000/api/artists/1
+
+### Update one artist
+PUT http://localhost:3000/api/artists/{{id}}
+Content-Type: application/json
+
+{
+    "name": "El Mister"
+}
+
+
+### Delete one artist
+DELETE http://localhost:3000/api/artists/{{id}}

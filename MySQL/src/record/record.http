@@ -1,0 +1,31 @@
+### Get all records
+GET http://localhost:3000/api/records
+
+
+### Create an record
+# @name createRecord
+POST http://localhost:3000/api/records
+Content-Type: application/json
+
+{
+    "name": "oktube",
+    "artistIds": [1]
+}
+
+### ID
+@id = {{createRecord.response.body.data.id}}
+
+### Get one record
+GET http://localhost:3000/api/records/{{id}}
+
+### Update one record
+PUT http://localhost:3000/api/records/{{id}}
+Content-Type: application/json
+
+{
+    "name": "oKTUBRE"
+}
+
+
+### Delete one record
+DELETE http://localhost:3000/api/records/{{id}}

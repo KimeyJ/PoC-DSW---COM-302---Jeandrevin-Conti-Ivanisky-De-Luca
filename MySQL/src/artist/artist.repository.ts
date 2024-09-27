@@ -6,21 +6,22 @@ import { ResultSetHeader, RowDataPacket } from 'mysql2';
 export class ArtistRepository implements Repository<Artist> {
   public async findAll(): Promise<Artist[] | undefined> {
     const [artists] = await pool.query('select * from artists');
+    if (![artists].length) return undefined;
     for (const artist of artists as Artist[]) {
       const [records] = await pool.query(
-        'select name from records inner join artists-records where idArtist = ? and idRecord = id',
+        'select r.* from records r inner join `artists-records` ar on r.id = ar.idRecord where ar.idArtist = ?',
         [artist.id]
       );
-      artist.records = (records as { name: string }[]).map(
-        (record) => record.name
-      );
+      artist.records = records as any;
     }
-
     return artists as Artist[];
   }
 
   public async findOne(item: { id: string }): Promise<Artist | undefined> {
     const id = Number.parseInt(item.id);
+    if (isNaN(id) || id < 0) {
+      throw new Error('Invalid artist ID');
+    }
     const [artists] = await pool.query<RowDataPacket[]>(
       'select * from artists where id = ?',
       [id]
@@ -30,12 +31,10 @@ export class ArtistRepository implements Repository<Artist> {
     }
     const artist = artists[0] as Artist;
     const [records] = await pool.query(
-      'select name from records inner join artists-records where idArtist = ? and idRecord = id',
+      'select r.* from records r inner join `artists-records` ar on r.id = ar.idRecord where ar.idArtist = ?',
       [artist.id]
     );
-    artist.records = (records as { name: string }[]).map(
-      (record) => record.name
-    );
+    artist.records = records as any;
     return artist;
   }
 
@@ -46,54 +45,42 @@ export class ArtistRepository implements Repository<Artist> {
       [artistRow]
     );
     artistInput.id = result.insertId;
-    for (const record of records) {
-      await pool.query('insert into characterItems set ?', {
-        characterId: characterInput.id,
-        itemName: item,
+    /*for (const record of records) {
+      await pool.query('insert into records set ?', {
+        artistId: artistInput.id,
+        name: record,
       });
-    }
+    }*/
 
-    return characterInput;
+    return artistInput;
   }
 
   public async update(
     id: string,
-    characterInput: Character
-  ): Promise<Character | undefined> {
-    const characterId = Number.parseInt(id);
-    const { items, ...characterRow } = characterInput;
-    await pool.query('update characters set ? where id = ?', [
-      characterRow,
-      characterId,
+    artistInput: Artist
+  ): Promise<Artist | undefined> {
+    const artistId = Number.parseInt(id);
+    const { records, ...artistRow } = artistInput;
+    await pool.query('update artists set ? where id = ?', [
+      artistRow,
+      artistId,
     ]);
 
-    await pool.query('delete from characterItems where characterId = ?', [
-      characterId,
-    ]);
-
-    if (items?.length > 0) {
-      for (const itemName of items) {
-        await pool.query('insert into characterItems set ?', {
-          characterId,
-          itemName,
-        });
-      }
-    }
     return await this.findOne({ id });
   }
 
-  public async delete(item: { id: string }): Promise<Character | undefined> {
+  public async delete(item: { id: string }): Promise<Artist | undefined> {
     try {
-      const characterToDelete = await this.findOne(item);
-      const characterId = Number.parseInt(item.id);
+      const artistToDelete = await this.findOne(item);
+      const artistId = Number.parseInt(item.id);
       await pool.query(
-        'delete from characterItems where characterId = ?',
-        characterId
+        'delete r, ar from records r inner join `artists-records` ar on r.id = ar.idRecord where ar.idArtist = ?',
+        artistId
       );
-      await pool.query('delete from characters where id = ?', characterId);
-      return characterToDelete;
+      await pool.query('delete from artists where id = ?', artistId);
+      return artistToDelete;
     } catch (error: any) {
-      throw new Error('unable to delete character');
+      throw new Error('unable to delete artist');
     }
   }
 }
