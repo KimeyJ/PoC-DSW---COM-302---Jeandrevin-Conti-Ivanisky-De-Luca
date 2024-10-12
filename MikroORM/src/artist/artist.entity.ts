@@ -22,3 +22,5 @@ export class Artist extends BaseEntity {
   })
   records!: Record[];
 }
+
+

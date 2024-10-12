@@ -10,6 +10,8 @@ function sanitizeRecordInput(req: Request, res: Response, next: NextFunction) {
     name: req.body.name,
     release_date: req.body.release_date,
     genre: req.body.genre,
+    artists: req.body.artists,
+    songs: req.body.songs
   };
 
   Object.keys(req.body.sanitizedInput).forEach((key) => {

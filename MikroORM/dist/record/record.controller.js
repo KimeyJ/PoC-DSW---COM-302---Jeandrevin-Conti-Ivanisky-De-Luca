@@ -7,6 +7,8 @@ function sanitizeRecordInput(req, res, next) {
         name: req.body.name,
         release_date: req.body.release_date,
         genre: req.body.genre,
+        artists: req.body.artists,
+        songs: req.body.songs
     };
     Object.keys(req.body.sanitizedInput).forEach((key) => {
         if (req.body.sanitizedInput[key] === undefined) {

@@ -9,8 +9,7 @@ Content-Type: application/json
 
 {
     "name": "Indio Solari",
-    "age" : 70,
-    "records":[1]
+    "age" : 70
 }
 
 ### ID
@@ -38,6 +37,5 @@ Content-Type: application/json
 
 {
     "name": "Lana del Rey",
-    "age" : 39,
-    "records": [2]
+    "age" : 39
 }

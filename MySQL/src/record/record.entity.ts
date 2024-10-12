@@ -1,3 +1,4 @@
+
 import { Artist } from '../artist/artist.entity.js';
 import { Song } from '../song/song.entity.js';
 
@@ -9,3 +10,5 @@ export class Record {
     public id?: number
   ) {}
 }
+
+

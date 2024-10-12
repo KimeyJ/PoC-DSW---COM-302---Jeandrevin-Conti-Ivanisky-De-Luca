@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { orm } from '../shared/orm.js';
 import { Song } from './song.entity.js';
+import { Record } from '../record/record.entity.js';
 
 const em = orm.em;
 
@@ -54,8 +55,11 @@ async function findOne(req: Request, res: Response) {
 
 async function add(req: Request, res: Response) {
   try {
+    const id = Number.parseInt(req.body.record);
+    const record = await em.findOneOrFail(Record, {id});
     const song = em.create(Song, req.body.sanitizedInput);
     await em.flush();
+    await record.songs.add(song);
     res.status(201).json({ message: 'Song created', data: song });
   } catch (error: any) {
     res.status(500).json({ message: error.message });

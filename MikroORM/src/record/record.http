@@ -10,7 +10,8 @@ Content-Type: application/json
 {
     "name": "oktubre",
     "release_date": "10-04-1986",
-    "genre": "ROCK"
+    "genre": "ROCK",
+    "artists": [1,2]
 }
 
 ### ID
@@ -24,7 +25,7 @@ PUT http://localhost:3000/api/records/{{id}}
 Content-Type: application/json
 
 {
-    "artists": [1] 
+    "songs": [1] 
 }
 
 ### Delete a record
@@ -38,6 +39,7 @@ Content-Type: application/json
 
 {
     "name": "Born to Die",
-    "release_date" : "27-01-2012",
-    "genre": "Alt Pop"
+    "release_date" : "01-27-2012",
+    "genre": "Alt Pop",
+    "artists": [2]
 }

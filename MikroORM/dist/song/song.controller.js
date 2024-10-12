@@ -1,5 +1,6 @@
 import { orm } from '../shared/orm.js';
 import { Song } from './song.entity.js';
+import { Record } from '../record/record.entity.js';
 const em = orm.em;
 function sanitizedSongInput(req, res, next) {
     req.body.sanitizedInput = {
@@ -40,8 +41,11 @@ async function findOne(req, res) {
 }
 async function add(req, res) {
     try {
+        const id = Number.parseInt(req.body.record);
+        const record = await em.findOneOrFail(Record, { id });
         const song = em.create(Song, req.body.sanitizedInput);
         await em.flush();
+        await record.songs.add(song);
         res.status(201).json({ message: 'Song created', data: song });
     }
     catch (error) {
